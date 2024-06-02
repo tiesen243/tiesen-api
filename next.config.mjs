@@ -5,7 +5,9 @@ const nextConfig = {
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
   async headers() {
-    return [{ headers: [{ key: 'Access-Control-Allow-Origin', value: '*' }] }]
+    return [
+      { source: '/api/:path*', headers: [{ key: 'Access-Control-Allow-Origin', value: '*' }] },
+    ]
   },
 }
 
