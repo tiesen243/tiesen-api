@@ -18,7 +18,7 @@ export const POST = async (req: NextRequest) => {
     const body = await req.json()
     const parsed = await schema.parseAsync(body)
     if (parsed.api_key !== process.env.API_KEY)
-      return NextResponse.json({ message: 'Invalid API key' }, { status: 401 })
+      return NextResponse.json({ error: 'Invalid API key' }, { status: 401 })
 
     const { data, error } = await resend.emails.send({
       from: `${parsed.from} <${process.env.DOMAIN}>`,
