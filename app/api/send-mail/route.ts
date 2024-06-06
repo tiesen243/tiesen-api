@@ -10,23 +10,22 @@ const schema = z.object({
   reply_to: z.string().email({ message: 'Email is not valid' }),
   subject: z.string().min(4, { message: 'Subject must be at least 4 characters' }),
   message: z.string().min(10, { message: 'Message must be at least 10 characters' }),
+  api_key: z.string(),
 })
 
 export const POST = async (req: NextRequest) => {
-  const key = String(req.nextUrl.searchParams.get('key'))
-  if (key !== process.env.API_KEY)
-    return NextResponse.json({ message: 'Invalid API key' }, { status: 401 })
-
   try {
     const body = await req.json()
-    const validData = await schema.parseAsync(body)
+    const parsed = await schema.parseAsync(body)
+    if (parsed.api_key !== process.env.API_KEY)
+      return NextResponse.json({ message: 'Invalid API key' }, { status: 401 })
 
     const { data, error } = await resend.emails.send({
-      from: `${validData.from} <${process.env.DOMAIN}>`,
-      to: validData.to,
-      reply_to: validData.reply_to,
-      subject: validData.subject,
-      text: validData.message,
+      from: `${parsed.from} <${process.env.DOMAIN}>`,
+      to: parsed.to,
+      reply_to: parsed.reply_to,
+      subject: parsed.subject,
+      text: parsed.message,
     })
 
     if (error)

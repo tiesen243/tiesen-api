@@ -1,16 +1,22 @@
 import { db } from '@/prisma'
 import { type NextRequest, NextResponse } from 'next/server'
 
-export const GET = async (req: NextRequest) => {
-  const slug = String(req.nextUrl.searchParams.get('slug'))
-  const key = String(req.nextUrl.searchParams.get('key'))
+import { z } from 'zod'
 
-  if (key !== process.env.API_KEY)
+const schema = z.object({
+  slug: z.string(),
+  key: z.string(),
+})
+
+export const POST = async (req: NextRequest) => {
+  const body = await req.json()
+  const parsed = schema.parse(body)
+  if (parsed.key !== process.env.API_KEY)
     return NextResponse.json({ error: 'Invalid API key' }, { status: 401 })
 
   try {
-    await db.view.delete({ where: { slug } })
-    return NextResponse.json({ slug }, { status: 200 })
+    await db.view.delete({ where: { slug: parsed.slug } })
+    return NextResponse.json({ slug: parsed.slug }, { status: 200 })
   } catch (e) {
     return NextResponse.json({ error: 'Slug not found' }, { status: 404 })
   }
