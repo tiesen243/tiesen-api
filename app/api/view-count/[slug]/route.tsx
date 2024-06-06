@@ -1,3 +1,4 @@
+import { headers } from 'next/headers'
 import { ImageResponse } from 'next/og'
 import { NextResponse, type NextRequest } from 'next/server'
 
@@ -12,12 +13,11 @@ interface Context {
 const imageUrl = 'https://raw.githubusercontent.com/tiesen243/tiesen243/main/theme'
 
 export const GET = async (req: NextRequest, { params: { slug } }: Context) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const _headerList = headers()
+
   const theme = (req.nextUrl.searchParams.get('theme') as Theme) ?? 'gelbooru'
 
-  /* Check if view exists
-   * If not, create a new view with 0 value
-   * If exists, increment the view by 1
-   */
   const isExisted = await db.view.findUnique({ where: { slug } })
   if (!isExisted) await db.view.create({ data: { slug } })
   else
@@ -45,6 +45,10 @@ export const GET = async (req: NextRequest, { params: { slug } }: Context) => {
         ))}
       </div>
     ),
-    { width: 1100, height: 400 },
+    {
+      width: 1100,
+      height: 400,
+      headers: { 'Cache-Control': 'no-store' },
+    },
   )
 }
