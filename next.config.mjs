@@ -9,6 +9,11 @@ const nextConfig = {
       { source: '/api/:path*', headers: [{ key: 'Access-Control-Allow-Origin', value: '*' }] },
     ]
   },
+  experimental: {
+    staleTimes: {
+      dynamic: 30,
+    },
+  },
 }
 
 export default nextConfig
