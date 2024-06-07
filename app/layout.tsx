@@ -1,12 +1,17 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
+import { getBaseUrl } from '@/app/utils'
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(getBaseUrl()),
   title: 'Tiesen API',
   description: 'API for doing some stuff',
   icons: { icon: '/favicon.ico' },
+  openGraph: { url: getBaseUrl() },
+  alternates: { canonical: getBaseUrl() },
 }
 
 const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => (

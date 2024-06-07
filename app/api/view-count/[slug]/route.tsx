@@ -1,13 +1,14 @@
 import { ImageResponse } from 'next/og'
 import { NextResponse, type NextRequest } from 'next/server'
 
+import { getBaseUrl } from '@/app/utils'
 import { db } from '@/prisma'
 
 interface Context {
   params: { slug: string }
 }
 
-const imageUrl = 'https://raw.githubusercontent.com/tiesen243/tiesen-api/main/public/theme'
+const imageUrl = getBaseUrl() + '/theme'
 
 export const GET = async (req: NextRequest, { params: { slug } }: Context) => {
   const theme = req.nextUrl.searchParams.get('theme') ?? 'gelbooru'
