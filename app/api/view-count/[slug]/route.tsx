@@ -33,24 +33,23 @@ export const GET = async (req: NextRequest, { params: { slug } }: Context) => {
   const count = String(view?.count ?? '0')
     .padStart(7, '0')
     .split('')
-  // Get the extension of the image
-  const extension = theme.endsWith('-h') ? 'png' : 'gif'
 
   if (theme === 'no') return NextResponse.json(view?.count ?? '0')
 
+  const ext = theme.endsWith('-h') ? 'png' : 'gif'
   return new ImageResponse(
     (
       <div tw="w-full h-full flex justify-center items-center px-2">
         {count.map((c, i) => (
           // eslint-disable-next-line @next/next/no-img-element
-          <img key={i} src={`${imageUrl}/${theme}/${c}.${extension}`} alt={c} tw="w-36 h-72" />
+          <img key={i} src={`${imageUrl}/${theme}/${c}.${ext}`} alt={c} tw="w-36 h-72" />
         ))}
       </div>
     ),
     {
-      width: 1100,
-      height: 400,
-      headers: { 'Cache-Control': 'no-store' },
+      width: 1050,
+      height: 350,
+      headers: { 'Cache-Control': 'max-age=0, no-cache, no-store, must-revalidate' },
     },
   )
 }
