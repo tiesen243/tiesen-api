@@ -3,16 +3,14 @@ import { NextResponse, type NextRequest } from 'next/server'
 
 import { db } from '@/prisma'
 
-type Theme = 'asoul' | 'gelbooru' | 'gelbooru-h' | 'moebooru' | 'moebooru-h' | 'rule34' | 'no'
-
 interface Context {
   params: { slug: string }
 }
 
-const imageUrl = 'https://raw.githubusercontent.com/tiesen243/tiesen243/main/theme'
+const imageUrl = 'https://raw.githubusercontent.com/tiesen243/tiesen-api/main/theme'
 
 export const GET = async (req: NextRequest, { params: { slug } }: Context) => {
-  const theme = (req.nextUrl.searchParams.get('theme') as Theme) ?? 'gelbooru'
+  const theme = req.nextUrl.searchParams.get('theme') ?? 'gelbooru'
 
   // Check if theme not existed in the list
   if (
