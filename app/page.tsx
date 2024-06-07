@@ -63,6 +63,10 @@ const Page: NextPage = () => (
           />
         </li>
       ))}
+
+      <li>
+        <b>Note: </b>theme=&quot;no&quot; for return a number of views
+      </li>
     </ul>
   </article>
 )

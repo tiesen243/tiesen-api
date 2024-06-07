@@ -1,6 +1,13 @@
+import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
+
+export const metadata: Metadata = {
+  title: 'Tiesen API',
+  description: 'API for doing some stuff',
+  icons: { icon: '/favicon.ico' },
+}
 
 const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
   <html lang="en">

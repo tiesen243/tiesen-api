@@ -7,7 +7,7 @@ interface Context {
   params: { slug: string }
 }
 
-const imageUrl = 'https://raw.githubusercontent.com/tiesen243/tiesen-api/main/theme'
+const imageUrl = 'https://raw.githubusercontent.com/tiesen243/tiesen-api/main/public/theme'
 
 export const GET = async (req: NextRequest, { params: { slug } }: Context) => {
   const theme = req.nextUrl.searchParams.get('theme') ?? 'gelbooru'
