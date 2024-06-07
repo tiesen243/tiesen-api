@@ -47,17 +47,19 @@ const Page: NextPage = () => (
       style={{
         listStyle: 'none',
         fontWeight: 500,
+        padding: '0 0 0 1rem',
       }}
     >
       {themes.map((theme) => (
-        <li key={theme}>
+        <li key={theme} style={{ width: '100%' }}>
           <p>{theme}</p>
 
           <Image
-            src={`https://api.tiesen.com/api/view-count/tiesen243?theme=${theme}`}
+            src={`https://api.tiesen.id.vn/api/view-count/demo?theme=${theme}`}
             alt={theme}
             width={1050}
             height={350}
+            style={{ width: '100%', height: 'auto' }}
           />
         </li>
       ))}

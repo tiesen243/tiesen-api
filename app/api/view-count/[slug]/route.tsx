@@ -47,7 +47,10 @@ export const GET = async (req: NextRequest, { params: { slug } }: Context) => {
     {
       width: 1050,
       height: 350,
-      headers: { 'Cache-Control': 'max-age=0, no-cache, no-store, must-revalidate' },
+      headers: {
+        'Cache-Control':
+          slug === 'demo' ? 'max-age=31536000' : 'max-age=0, no-cache, no-store, must-revalidate',
+      },
     },
   )
 }
