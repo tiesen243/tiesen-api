@@ -20,22 +20,29 @@ export const GET = async (req: NextRequest, { params: { slug } }: Context) => {
     return NextResponse.json({ error: 'Theme not found' }, { status: 404 })
 
   const isExisted = await db.view.findUnique({ where: { slug } })
-  if (!isExisted) await db.view.create({ data: { slug } })
+  let counter = isExisted
+  if (!isExisted) counter = await db.view.create({ data: { slug } })
   else
-    await db.view.update({
+    counter = await db.view.update({
       where: { slug },
       data: { count: { increment: 1 } },
     })
 
   // Get the view count
-  const view = await db.view.findUnique({ where: { slug } })
-  const count = String(view?.count ?? '0')
+  const count = String(counter.count ?? '0')
     .padStart(7, '0')
     .split('')
 
-  if (theme === 'no') return NextResponse.json(view?.count ?? '0')
+  if (theme === 'no')
+    return NextResponse.json(counter.count ?? '0', {
+      headers: {
+        'Cache-Control':
+          slug === 'demo' ? 'max-age=31536000' : 'max-age=0, no-cache, no-store, must-revalidate',
+      },
+    })
 
   const ext = theme.endsWith('-h') ? 'png' : 'gif'
+
   return new ImageResponse(
     (
       <div tw="w-full h-full flex justify-center items-center px-2">

@@ -15,23 +15,23 @@
     "@prisma/client": "5.14.0",
     "@react-email/components": "^0.0.19",
     "@react-email/tailwind": "^0.0.18",
-    "next": "15.0.0-rc.0",
-    "react": "19.0.0-rc-f994737d14-20240522",
-    "react-dom": "19.0.0-rc-f994737d14-20240522",
-    "resend": "^3.2.0",
+    "next": "^14.2.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "resend": "^3.3.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/eslint": "^8.56.10",
-    "@types/node": "^20.14.2",
+    "@types/node": "^20.14.8",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "@typescript-eslint/eslint-plugin": "^7.13.0",
-    "@typescript-eslint/parser": "^7.13.0",
+    "@typescript-eslint/eslint-plugin": "^7.14.1",
+    "@typescript-eslint/parser": "^7.14.1",
     "eslint": "^8.57.0",
-    "eslint-config-next": "^14.2.3",
+    "eslint-config-next": "^14.2.4",
     "prettier": "^3.3.2",
-    "prisma": "^5.15.0",
-    "typescript": "^5.4.5"
+    "prisma": "^5.15.1",
+    "typescript": "^5.5.2"
   }
 }

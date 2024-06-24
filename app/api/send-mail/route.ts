@@ -15,8 +15,7 @@ const schema = z.object({
 
 export const POST = async (req: NextRequest) => {
   try {
-    const body = await req.json()
-    const parsed = await schema.parseAsync(body)
+    const parsed = schema.parse(await req.json())
     if (parsed.api_key !== process.env.API_KEY)
       return NextResponse.json({ error: 'Invalid API key' }, { status: 401 })
 
