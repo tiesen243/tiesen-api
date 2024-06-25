@@ -2,6 +2,8 @@ import { type NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { ZodError, z } from 'zod'
 
+import EmailTemplate from '@/emails/template'
+
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 const schema = z.object({
@@ -26,6 +28,7 @@ export const POST = async (req: NextRequest) => {
       reply_to: parsed.reply_to,
       subject: parsed.subject,
       text: parsed.message,
+      react: EmailTemplate(parsed),
     })
 
     if (error)
