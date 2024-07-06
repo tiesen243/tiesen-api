@@ -7,7 +7,8 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   metadataBase: new URL(getBaseUrl()),
-  title: 'Tiesen API',
+  title: 'Tiesen | API',
+  applicationName: 'Tiesen',
   description: 'API for doing some stuff',
   icons: { icon: '/favicon.ico' },
   openGraph: { url: getBaseUrl() },
