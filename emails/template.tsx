@@ -39,7 +39,7 @@ export const EmailTemplate: React.FC<Readonly<EmailProps>> = (props) => {
   const previewText = `Message from ${props.reply_to} on ${props.from}`
 
   return (
-    <Html>
+    <Html lang="en">
       <Head />
       <Preview>{previewText}</Preview>
 
@@ -54,8 +54,6 @@ export const EmailTemplate: React.FC<Readonly<EmailProps>> = (props) => {
               />
               <Heading>{props.subject}</Heading>
             </Section>
-
-            <hr className="border-border" />
 
             <Markdown
               markdownCustomStyles={{
