@@ -52,7 +52,7 @@ export const EmailTemplate: React.FC<Readonly<EmailProps>> = (props) => {
                 alt="logo"
                 className="w-16 h-16 mx-auto my-4"
               />
-              <Heading>{props.subject}</Heading>
+              <Heading className="text-center">{props.subject}</Heading>
             </Section>
 
             <Markdown
