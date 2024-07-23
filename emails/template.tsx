@@ -65,21 +65,22 @@ export const EmailTemplate: React.FC<Readonly<EmailProps>> = (props) => {
             >
               {props.message}
             </Markdown>
-
+            
+            <Text>Best Regards,</Text>
+            <Text>{props.from}</Text>
+            
             <hr className="border-border" />
 
             <Section>
+              <Text>
+                Website: <Link href="https://tiesen.id.vn/">https://tiesen.id.vn</Link>
+              </Text>
+              
               <Img
                 src="https://raw.githubusercontent.com/tiesen243/portfolio/main/public/imgs/tiesen.png"
                 alt="Tiesen"
                 className="w-52 h-auto my-4"
               />
-
-              <Text>
-                Website: <Link href="https://tiesen.id.vn/">https://tiesen.id.vn</Link>
-              </Text>
-
-              <Text>Best Regards,</Text>
             </Section>
           </Container>
         </Body>
