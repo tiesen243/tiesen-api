@@ -35,8 +35,16 @@ const config: TailwindConfig = {
   },
 }
 
+const mock = {
+  from: 'Tiesen',
+  reply_to: 'ttien56906@gmail.com',
+  subject: 'Hello, World!',
+  message: `# Hello, World!`,
+}
+
 export const EmailTemplate: React.FC<Readonly<EmailProps>> = (props) => {
-  const previewText = `Message from ${props.reply_to} on ${props.from}`
+  const data = process.env.NODE_ENV === 'production' ? props : mock
+  const previewText = `Message from ${data.reply_to} on ${data.from}`
 
   return (
     <Html lang="en">
@@ -52,7 +60,7 @@ export const EmailTemplate: React.FC<Readonly<EmailProps>> = (props) => {
                 alt="logo"
                 className="w-16 h-16 mx-auto my-4"
               />
-              <Heading className="text-center">{props.subject}</Heading>
+              <Heading className="text-center">{data.subject}</Heading>
             </Section>
 
             <Markdown
@@ -62,20 +70,29 @@ export const EmailTemplate: React.FC<Readonly<EmailProps>> = (props) => {
                 h3: { marginTop: 2, marginBottom: 2 },
                 h4: { marginTop: 2, marginBottom: 2 },
               }}
+              markdownContainerStyles={{
+                background: 'hsl(240 10% 3.9%)',
+                color: 'hsl(0 0% 98%)',
+              }}
             >
-              {props.message}
+              {data.message}
             </Markdown>
-            
-            <Text>Best Regards,</Text>
-            <Text>{props.from}</Text>
-            
-            <hr className="border-border" />
 
+            <Text>
+              Best Regards, <br />
+              {data.from}
+            </Text>
+
+            <hr className="border-border" />
             <Section>
               <Text>
                 Website: <Link href="https://tiesen.id.vn/">https://tiesen.id.vn</Link>
+                <br />
+                Email: <Link href={`mailto:${mock.reply_to}`}>{mock.reply_to}</Link>
+                <br />
+                Address: Saigon, Vietnam
               </Text>
-              
+
               <Img
                 src="https://raw.githubusercontent.com/tiesen243/portfolio/main/public/imgs/tiesen.png"
                 alt="Tiesen"
