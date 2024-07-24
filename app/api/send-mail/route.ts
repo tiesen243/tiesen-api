@@ -8,10 +8,10 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 
 const schema = z.object({
   from: z.string(),
-  to: z.string().email({ message: 'Email is not valid' }),
-  reply_to: z.string().email({ message: 'Email is not valid' }),
-  subject: z.string().min(4, { message: 'Subject must be at least 4 characters' }),
-  message: z.string().min(10, { message: 'Message must be at least 10 characters' }),
+  to: z.string().email('Email is not valid'),
+  reply_to: z.string().email('Email is not valid'),
+  subject: z.string().min(4, 'Subject must be at least 4 characters'),
+  message: z.string().min(10, 'Message must be at least 10 characters'),
   api_key: z.string(),
 })
 
